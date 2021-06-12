@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Welcome to the Movies App. Add your favorite movies, rate them and like others uploaded by other users."
+    />
+    <meta
+      name="keywords"
+      content="HTML, CSS, Django, Movies, Sharing, Rating, Liking, Fun"
+    />
+    <meta name="author" content="RingVision" />
+    {% load static %}
+    <!-- Large Bold Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+    <!-- Smaller font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Comfortaa&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/nav_bar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}" />
+    <link rel="icon" href="{% static 'img/movies_title.jpg' %}" type="image/gif">
+  
+    {% block head %}   
+    {% endblock head %}
+  </head>
+  <body>
+
+    {% include "navbar.html" %}
+    
+
+    {% block content %} 
+    
+    {% endblock content %}
+    
+    
+    {% include "footer.html" %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/navBar.js' %}"></script>
+  </body>
+</html>

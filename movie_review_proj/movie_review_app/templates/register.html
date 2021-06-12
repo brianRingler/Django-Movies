@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <title>Register</title>
+{% endblock head %} 
+
+{% block content %}
+<div class="register-wrapper">
+    <ul class="error-msgs">
+        {% if messages %}
+            {% for message in messages %}
+                <li {% if message.tags %} class"{{message.tags}}"{% endif %}>{{message}}</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <form action="/register/" method="POST" name=register-frm>
+        {% csrf_token %}
+        <h1>Registration</h1>
+        <div>
+            <label for="first-name">First Name</label>
+            <input type="text" name="reg-first-nm" id="first-name" placeholder="Randy">
+        </div>
+
+        <div>
+            <label for="last-name">Last Name</label>
+            <input type="text" name="reg-last-nm" id="last-name" placeholder="Jackson">
+        </div>
+
+        <div>
+            <label for="reg-dob">Birthday</label>
+            <input type="date" name="reg-dob-nm" id="reg-dob" min="1900-01-01" max="2025-01-01">
+        </div>
+
+        <div>
+            <label for="time-zone">Time Zone</label>
+                <select name="time-zone-nm" class="states" id="time-zone" required>
+                    <option value="0">Select Time Zone</option>
+                    {% for idx, tz in time_zones %}
+                        <option value="{{ idx }}">{{ tz }}</option>
+                    {% endfor %}
+                </select>
+        </div>
+
+        <div>
+            <label for="reg-email">Email</label>
+            <input type="email" name="reg-email-nm" id="reg-email" placeholder="my-name@coolmail.com">
+        </div>
+
+        <div>
+            <label for="reg-password">Password</label>
+            <input type="password" name="reg-password-nm" id="reg-password" maxlength="50">
+        </div>
+
+        <div>
+            <label for="reg-confirm">Confirm</label>
+            <input type="password" name="reg-confirm-nm" id="reg-confirm">
+        </div>
+        <input type="submit" name="reg-sub-btn" value="Register">
+    </form>
+</div>
+
+
+{% endblock %}

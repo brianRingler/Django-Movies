@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 1px dotted rgb(234, 0, 255); */
+}
+
+.wrapper-navbar {
+    position: sticky;
+    top: 0px;
+    width: 100%;
+  }
+    
+  .side-bar {
+      position: absolute;
+      right:45px;
+      margin-top: 5px;
+      color: var(--text-yellow);
+  }
+
+  .title {
+    position: absolute;
+    left: 45px;
+    font-family: var(--bold-font);
+    color: var(--text-yellow);
+    font-size: 2.25rem;
+  }
+  
+  
+  .navbar {
+    display: flex;
+    flex-wrap: row wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--text-font);
+    font-size: 1.5rem;
+    color: var(--text-yellow);
+    background-color:black;
+    overflow: hidden;
+    height: 65px;   
+ 
+  }
+  
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-yellow);
+  }
+  
+  /* Style the navbar links*/
+  .navbar a {
+    margin: 0 0 0 65px;
+    text-decoration: none; /* Remove link underline, etc*/
+    color: var(--text-yellow);
+  }
+  
+  .navbar ul {
+    list-style: none; /* Remove bullets*/
+    margin: 0 0 5px 0;
+  }
+  
+  li {
+    list-style-type: none;
+  }
+  
+  /* Navbar modify on hover*/
+  .navbar-nav a:hover {
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--text-yellow);
+  }
+  
+  .side-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1; /* Keep on top*/
+    top: 0; /* Set upper left corner with top left = 0 */
+    left: 0;
+    background-color: #15181C;
+    opacity: 0.9;
+    overflow-x: hidden;
+    padding-top: 75px;
+    transition: 1s;
+  }
+  
+  /* Style the links for the side nav*/
+  .side-nav a {
+    padding: 10px 10px 10px 30px;
+    text-decoration: none;
+    font-size: 20px;
+    color: var(--text-yellow);
+    display: block;
+    transition: 0.3s;
+  }
+  
+  #side-bar  a:hover {
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--text-yellow);
+  }
+  
+  /* Style and set the position for the side nav*/
+  .btn-close {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 20px;
+    margin-left: 5px;
+    cursor: pointer;
+  }

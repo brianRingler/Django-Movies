@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}" />
+    <title>Home</title>
+{% endblock head %} 
+
+
+{% block content %}
+
+<div class="wrapper-index">   
+    <h1 class="welcome-index">The Movies</h1>
+    <div class="about-cards-main">
+        <div class="cards">
+            <P>Welcome to <strong>Blog City</strong>The site that allows you to share your thoughts and blog about any topic you would like. Or maybe just comment on other topics...that's fine, too. Just have fun and enjoy the site.</P>
+        </div>
+        <div class="cards">
+            <P>"Sounds GREAT...how do I get started?" This site is easy to use. Simply Register for an account and if you pass the seven levels of the Candy Cane Forest then you are halfway there. Now, it's the endurance part where you will make snowangels for 2 hours, then go skating, then eat a roll of Tollhouse cookie dough and lastly snuggle with a raccoon!</P>
+        </div>
+        <div class="cards">
+            <P>"Okay, I am exhausted from the snowangels but I have completed the registration process. What topics are there?"  Well, Blog City has amazing and interesting topics: Python, TensorFlow, JavaScript, Machine Learning, Bitcoin, Alt Coins and more...</P>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

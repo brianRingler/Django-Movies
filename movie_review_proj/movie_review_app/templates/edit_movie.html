@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/view_movie.css' %}" />
+    <title>View Movie</title>
+{% endblock head %} 
+{% block content %}
+<div class="wrapper-selected-movie">
+    <ul class="error-msgs" >
+        {% if messages %}
+            {% for message in messages %}
+                <li {% if message.tags %} class"{{message.tags}} blink"{% endif %}>{{message}}</li>
+            {% endfor %}
+        {% endif %}
+    </ul> 
+
+    <div class="left-side-bar">
+        <div class="imdb-header">
+            <h1>IMDB Top 250</h1>
+        </div>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+    </div>
+
+    <div class="selected-movie">
+        <div class="form-container">
+            <form action="/view-movie/{{ movie.id }}/" method="POST" name="edit-movie-nm" id="add-movie">
+                {% csrf_token %}
+                <input  type="text" name="movie-title-edit-nm" id="movie-title-edit">
+                
+                <!-- ADD MOVIE ID -->
+                <input type="hidden" name="hidden-movie-id" value='TBD-ID'>
+
+                <div class="edit-movie">
+                    <p>Added By</p>
+                    <p>First Name LastName</p>
+                </div>
+
+                <div class="edit-movie">
+                    <p>Added On</p>
+                    <p>March 5, 2019</p>
+                </div>
+
+                <div class="edit-movie">
+                    <p>Last Update</p>
+                    <p>July, 15 2021</p>
+                </div>
+
+                <div class="edit-movie">
+                    <label for="movie-desc">Description</label>
+                    <textarea class="data-collect" name="movie-desc-nm" id="movie-desc" cols="30" rows="10" required></textarea>
+                </div>
+
+                <div class="edit-movie">
+                    <input type="submit" name="edit-update-submit-nm" id="edit-update-submit" value="Update">
+                    <button><a href="/delete-movie/<int:id_delete>/" >Delete</a></button>
+                </div>
+
+            </form>
+
+            <form action="#" method="POST" name="movie-liked-by-nm">
+                {% csrf_token %}
+                <h1>Who Liked MOVIE NAME</h1>
+                <div class="movie-by-user">
+                    <div class="movie-liked-by">
+                        <p class="users-who-liked">Marvin Lewis</p>>
+                        <span id="thumbs-down">👎</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="right-side-bar">
+        <div class="fav-movie-header">
+            <h1>User Movie Ratings</h1>
+        </div>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+        <p>Title of the Movie and it could be...</p>
+    </div>
+
+</div>
+
+{% endblock %}

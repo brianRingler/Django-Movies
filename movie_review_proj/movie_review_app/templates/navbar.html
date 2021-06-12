@@ -1,0 +1,44 @@
+<div class="wrapper-navbar">
+    <nav class="navbar">
+      <span class="side-bar">
+        <a href="#" onclick="openSlideMenu()">
+          <svg width="30" height="30">
+            <path d="M0, 5 30, 5" stroke="#ffc600" stroke-width="5" />
+            <path d="M0, 14 30, 14" stroke="#ffc600" stroke-width="5" />
+            <path d="M0, 23 30, 23" stroke="#ffc600" stroke-width="5" />
+          </svg>
+        </a>
+      </span>
+
+      <span class="title">The Movies</span>
+      <ul class="navbar-nav">
+        {% if request.session.logged_in == True %} 
+            <li>Welcome, {{request.session.active_user_first}} {{request.session.active_user_last}}</li>
+            <li><a href="{% url 'home_view' %}">Home</a></li>
+            <li><a href="{% url 'add_movie_view' %}">Add Movie</a></li>
+            <li><a href="{% url 'profile_view' %}">Profile</a></li>
+            <li><a href="{% url 'log_out' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'home_view' %}">Home</a></li>
+            <li><a href="{% url 'login_view' %}">Login</a></li>
+            <li><a href="{% url 'register_view' %}">Register</a></li>
+        {% endif %}
+      </ul>
+
+      <div id="side-bar" class="side-nav">
+        <a href="#" class="btn-close" onclick="closeSlideMenu()">&Xfr;</a>
+        {% if request.session.logged_in == True %} 
+            <li>Welcome, {{request.session.active_user_first}} {{request.session.active_user_last}}</li>
+            <li><a href="{% url 'home_view' %}">Home</a></li>
+            <li><a href="{% url 'add_movie_view' %}">Add Movie</a></li>
+            <li><a href="{% url 'profile_view' %}">Profile</a></li>
+            <li><a href="{% url 'log_out' %}">Log Out</a></li>
+          {% else %}
+            <li><a href="{% url 'home_view' %}">Home</a></li>
+            <li><a href="{% url 'login_view' %}">Login</a></li>
+            <li><a href="{% url 'register_view' %}">Register</a></li>
+        {% endif %}
+      </div>
+
+    </nav>
+</div>

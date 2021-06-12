@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: 1px dotted rgb(234, 0, 255); */
+}
+
+/* Error message from Django*/
+.error-msgs {
+    position: absolute;
+    top: 275px;
+    right: 185px;
+}
+
+.error-msgs > li {
+    background-color: white;
+    padding: 10px 10px;
+    color: red;
+}
+/* end error messages*/
+
+/* Declare global variables to use
+background-color: var(--dark-bg-color */ 
+:root {
+    --dark-bg-color:#282c34;
+    --bold-font: 'Anton', sans-serif;
+    --text-font: 'Comfortaa', cursive;
+    --text-yellow: #ffc600;
+    --text-black: black;
+}
+
+.wrapper-selected-movie {
+    min-height: 100vh; 
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+            "left   center   right";
+}
+
+
+/* Combine left and right side bar */
+.imdb-header > h1,
+.fav-movie-header > h1 {
+    font-family: var(--bold-font);
+    margin-bottom: 10px;
+}
+
+.left-side-bar > p,
+.right-side-bar > p {
+    margin-bottom: 10px;
+    /* transform: translateX(100%);
+    animation: tickMoving 3s linear infinite; */
+}
+
+
+/* @keyframes tickMoving {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+} */
+
+.left-side-bar > p:hover,
+.right-side-bar > p:hover {
+    animation-play-state: paused;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+p > a {
+    text-decoration: none;
+    color: var(--text-black)
+}
+
+
+/* End Combined Side Bars */
+
+.left-side-bar {
+    grid-area: left;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    
+    background-color: var(--text-yellow);
+    font-size: 18px;
+    color: var(--text-black);
+    padding: 10px 10px;
+}
+
+/* CENTER SECTION */
+.selected-movie {
+    grid-area: center;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin: 25px 0px;
+}
+
+.form-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+/* Set space between two forms. Not sure why 'space-evenly' did not 
+work correctly in class .add-movie-all-movies */
+form[name="edit-movie-nm"] {
+    margin-right: 150px;
+}
+
+/* Center Section LEFT Side Form START */
+form[name="edit-movie-nm"] {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+
+    width:31.10rem;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid var(--text-yellow);
+    border-radius: 5px;
+    background-color: rgba(245, 245, 245, 0.575);
+    box-shadow:  15px 15px 10px black;
+}
+
+.edit-movie {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+/* Center Section RIGHT Side Form START */
+form[name="movie-liked-by-nm"] {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    width:23rem;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid var(--text-yellow);
+    border-radius: 5px;
+    background-color: rgba(245, 245, 245, 0.575);
+    box-shadow:  15px 15px 10px black;
+}
+
+.movie-by-user {
+    display:  flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.movie-liked-by {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    margin: 5px 0 20px 20px; 
+    font-size: 19px;
+}
+
+
+
+.movie-liked-by > span {
+    margin-left: 10px;
+}
+
+
+/* Start RIGHT side bar*/
+.right-side-bar {
+    grid-area: right;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    
+    background-color: var(--text-yellow);
+    font-size: 18px;
+    color: var(--text-black);
+    padding: 10px 10px;
+}
+
+
+/* Input fields */
+label {
+    font-size: 1.25rem;
+}
+
+
+input[type="text"], 
+textarea  {
+    border-radius: 15px;
+    border: 2px solid var(--text-yellow);
+    padding: 6px 12px;
+    margin-bottom: 20px;
+    height: 2rem;
+    width: 20rem;
+    font-size: 0.8rem;
+    font-family: var(--text-font);
+    color: var(--text-black);
+    resize: vertical;
+  }
+
+  textarea {
+      height: 5rem;
+  }
+  
+  input[type="text"]:focus, 
+  textarea:focus {
+    /* offset-x | offset-y | blur-rad | color */
+    box-shadow: -5px -5px 5px #555 inset,5px 5px 5px #555 inset; 
+  }
+
+
+/*  Buttons */
+input[type="submit"],
+button {   
+    height: 2.25rem;
+    width: 7rem;
+    font-size: .85rem;
+    font-weight: bold;
+    border: 2px solid var(--text-yellow);
+    border-radius: 15px;
+    background-color: black;
+    color: var(--text-yellow);
+    margin-left: 22rem;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    cursor: pointer;
+    color: whitesmoke;
+    border: 2px solid white;
+    background:  var(--text-yellow);
+}

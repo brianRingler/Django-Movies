@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: 1px dotted rgb(234, 0, 255); */
+}
+
+/* Error message from Django*/
+.error-msgs {
+    position: absolute;
+    top: 275px;
+    right: 185px;
+}
+
+.error-msgs > li {
+    background-color: white;
+    padding: 10px 10px;
+    color: red;
+}
+/* end error messages*/
+
+.register-wrapper {
+    margin-top: 75px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+form {
+    margin-top: 25px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    width:37rem;
+    padding-bottom: 25px;
+    border: 1px solid var(--text-yellow);
+    border-radius: 5px;
+    background-color: rgba(245, 245, 245, 0.575);
+    box-shadow:  15px 15px 10px black;
+}
+
+h1  {
+    margin: 25px 0 20px 0;
+    font-size: 35px;
+}
+
+input { 
+    margin-left: 20px;
+}
+
+#reg-dob{margin-left: 45px;}
+#time-zone{margin-left: 28px;}
+#reg-email{margin-left: 85px;}
+#reg-password{margin-left: 40px;}
+#reg-confirm{margin-left: 57px;}
+

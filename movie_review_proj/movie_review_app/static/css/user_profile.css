@@ -1,0 +1,289 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: 1px dotted rgb(234, 0, 255); */
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-family: var(--bold-font);
+    margin-left: 35px;
+}
+
+.main-wrapper {
+    background: var(--dark-bg-color);
+    min-height: 100vh; 
+    display: grid;
+    grid-template-columns: 275px minmax(450px, 750px);
+    grid-template-rows: 65px auto auto  auto;
+    grid-template-areas:
+            "lsb   sec1   sec1"
+            "lsb   sec1   sec1"
+            "lsb   sec2   sec2"
+            "lsb   sec3   sec3";
+}
+
+
+.left-side-bar {
+    grid-area: lsb;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--text-black);
+    background-color: var(--text-yellow);
+    font-size: 19px;
+    padding: 10px 10px;
+}
+
+.left-side-bar > img {
+    border-radius: 50%;
+    max-width: 200px;
+    max-height: 225px;
+    margin-top: 40px;
+}
+
+.left-side-bar > h4 {
+    margin-top: 30px;
+}
+.left-side-bar > p {
+    margin-top: 10px;
+}
+
+/* Start General Section sec-1 */
+.sec-1 {
+    grid-area: sec1;
+    margin-top: 0.5rem;
+}
+
+
+form[name="general-frm"] {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 0.80rem;
+    margin: 25px 25px;
+
+    padding: 20px 0 0 0;
+    border: 1px solid var(--text-yellow);
+    border-radius: 5px;
+    background-color: rgba(245, 245, 245, 0.575);
+    box-shadow:  15px 15px 10px black;
+}
+
+.left-general, .right-general {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    margin-right: 13rem;
+    
+}
+
+/* Align input sections sec-1 general */
+#first-name {margin-left: 40px; }
+#last-name {margin-left: 40px; }
+#user-dob {margin-left: 65px; }
+#display-name {margin-left: 10px; }
+#time-zone {margin-left: 50px; }
+
+.gender-radio {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+}
+
+.gender-radio > p { 
+    margin-right: 65px;
+    font-size: 25px;
+} 
+
+#gen-male, #gen-female { 
+    margin-left: 20px;
+}
+
+
+input[type="file"] {margin-left: 7px;}
+#description {
+    margin-left: 35px;
+    height: 130px;
+}
+
+/* prevent user from accessing email */
+#user-email {
+    user-select: none;
+    color: #787878;
+    margin-left: 85px;
+}
+
+.register-details {
+    display: flex;
+    flex-flow: row;
+    align-items: flex-start;
+}
+
+
+/* Start Contact Information Section sec-2 */
+.sec-2 {
+    grid-area: sec2;
+}
+
+form[name="contact-frm"] {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    margin: 25px 25px;
+
+    padding: 20px 0 0 0;
+    border: 1px solid var(--text-yellow);
+    border-radius: 5px;
+    background-color: rgba(245, 245, 245, 0.575);
+    box-shadow:  15px 15px 10px black;
+}
+
+.left-contact, .right-contact {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    margin-right: 13rem;
+}
+
+/* align input labels sec-2 Contact Information */
+#handy-phone-num {margin-left: 15px;}
+#office-phone-num {margin-left: 29px;}
+#office-phone-ext {margin-left: 55px;}
+#contact-url {margin-left: 35px;}
+
+
+/* Start Address Section sec-3 */
+.sec-3 {
+    grid-area: sec3;
+    padding-bottom: 105px;
+}
+
+form[name="address-frm"] {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    margin: 25px 25px;
+
+    padding: 20px 0 0 0;
+    border: 1px solid var(--text-yellow);
+    border-radius: 5px;
+    background-color: rgba(245, 245, 245, 0.575);
+    box-shadow:  15px 15px 10px black;
+}
+
+.left-address, .right-address {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    margin-right: 13rem;
+  
+}
+
+#str-num { margin-left: 15px;}
+#str-name { margin-left: 40px;}
+#po-box{ margin-left: 35px;}
+#address-state { margin-left: 50px;}
+#address-city { margin-left: 65px;}
+#zip-code { margin-left: 12px;}
+
+.general-btns,
+.contact-btns,
+.address-btns {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    padding: none;
+    margin-bottom: 30px;
+}
+
+button {
+    margin-left: 20px
+}
+
+/* Input fields */
+label {
+    font-size: 1.25rem;
+}
+
+input[type="file"],
+input[type="radio"] {
+    margin-bottom: 20px;
+}
+
+
+input[type="text"], 
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+input[type="url"], 
+input[type="number"],
+input[type="password"],
+textarea, 
+select  {
+    border-radius: 15px;
+    border: 2px solid var(--text-yellow);
+    padding: 6px 12px;
+    margin-bottom: 20px;
+    height: 2rem;
+    width: 20rem;
+    font-size: 0.8rem;
+    font-family: var(--text-font);
+    color: var(--text-black);
+    resize: vertical;
+  }
+
+  textarea {
+      height: 5rem;
+  }
+  
+  input[type="text"]:focus, 
+  input[type="email"]:focus,
+  input[type="date"]:focus, 
+  input[type="password"]:focus,
+  textarea:focus, 
+  select:focus {
+    /* offset-x | offset-y | blur-rad | color */
+    box-shadow: -5px -5px 5px #555 inset,5px 5px 5px #555 inset; 
+  }
+
+
+/*  Buttons */
+input[type="submit"],
+button {   
+    height: 2.25rem;
+    width: 7rem;
+    font-size: .85rem;
+    font-weight: bold;
+    border: 2px solid var(--text-yellow);
+    border-radius: 15px;
+    background-color: black;
+    color: var(--text-yellow);
+}
+
+input[type="submit"]:hover {
+    cursor: pointer;
+    color: whitesmoke;
+    border: 2px solid white;
+    background:  var(--text-yellow);
+}
+
+button {
+    background: var(--text-yellow);
+    border: 2px solid var(--text-black);
+    color: var(--text-black);
+}
+
+button:hover {
+    cursor: pointer;
+    color: var(--text-yellow);
+    border: 2px solid var(--text-yellow);
+    background-color: var(--text-black);
+}

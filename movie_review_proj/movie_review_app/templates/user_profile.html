@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/profile_footer.css' %}" />
+    <title>User Profile</title>
+{% endblock head %}
+
+{% block content %}
+<div class="main-wrapper">
+    <div class="left-side-bar image">
+        <img src="{{ general.picture.url }}" 
+        alt="Image of the user">
+        <h4>First Name</h4>
+        <p>{{ request.session.active_user_first }}</p>
+        <h4>Last Name</h4>
+        <p>{{ request.session.active_user_last }}</p>
+        <h4>User ID</h4>
+        <p>{{ request.session.active_user_id }}</p>
+        <h4>Created</h4>
+        {% load tz %}
+        <p>{{ general.created_at|timezone:user_time_zone}}</p>
+        <h4>Last Updated</h4>
+        <p>{{ general.updated_at|timezone:user_time_zone}}</p>
+
+    </div>
+
+    <div class="general sec-1">
+        <h1 class="sec-heading">General</h1>
+        <form action="/profile/" method="POST" id="general-frm" name="general-frm" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="left-general">
+                <div>
+                    <label for="first-name">First Name</label>
+                    <input type="text" name="user-first-nm" id="first-name" placeholder="Randy" value="{{ general.first_name }}">
+                </div>
+
+                <div>
+                    <label for="last-name">Last Name</label>
+                    <input type="text" name="user-last-nm" id="last-name" placeholder="Jackson" value="{{ general.last_name }}">
+                </div>
+
+                <div>
+                    <label for="user-dob">Birthday</label>
+                    <input type="date" name="user-dob-nm" id="user-dob" min="1900-01-01" max="2025-01-01" value="{{ date }}">
+                </div>
+
+                <div>
+                    <label for="display-name">Display Name</label>
+                    <input type="text" name="user-display-nm" id="display-name" maxlength="50" placeholder="The name you would like displayed" value="{{ general.display_name }}" required>
+                </div>
+
+                <div>
+                    <label for="time-zone">Time Zone</label>
+                        <select name="time-zone-nm" class="states" id="time-zone" required>
+                            <option value="0">{{ general.timezone }}</option>
+                            {% for idx, tz in time_zones %}
+                                <option value="{{ tz }}">{{ tz }}</option>
+                            {% endfor %}
+                        </select>
+                </div>
+            </div>
+
+            <div class="right-general">
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="user-email-nm" id="user-email" placeholder="my-name@coolmail.com" value="{{ general.email }}" readonly="readonly">
+                </div>
+
+                <div>
+                    <label for="avatar">Profile Picture</label>
+                    <input type="file"
+                            id="avatar" name="user-pic-url-nm"
+                            accept="image/*" value="{{ general.picture.url }}">
+                    <input type="hidden" name="user-pic-name-nm" value="{{ general.picture.name }}">
+                </div>
+                
+                <div class="gender-radio">
+                    <p>Gender</p>
+                    <div>
+                        <input type="radio" id="gen-female" name="user-gender-nm" value="Female" {% if general.gender == 'Female' %} {{ 'checked' }}{% endif %}>
+                        <label for="gen-female">Female</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="gen-male" name="user-gender-nm" value="Male" {% if general.gender == 'Male' %} {{ 'checked' }}{% endif %}>
+                        <label for="gen-male">Male</label>
+                    </div>
+                </div>
+
+                    <div class="register-details">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="user-desc-nm" maxlength="250" rows="15" cols="12" placeholder="Tell us a little about you in less than 250 characters">{{ general.description }}</textarea>
+                    </div>
+            </div>
+        </form>
+                <div class="general-btns">
+                    <input type="submit" form="general-frm" id="gen-update-btn" value="Update"/>
+                    <button onClick="resetGeneralInfo()" id="gen-reset-btn">Reset</button>
+                </div>
+    </div>
+
+    <div class="contact sec-2">
+        <h1 class="sec-heading">Contact Information</h1>
+        <form action="/profile/contact-update/" method="POST" id="contact-frm" name="contact-frm">
+            {% csrf_token %}
+            <div class="left-contact">
+                <div>
+                    <label for="handy-phone-num">Handy-Mobile</label>
+                    <input type="tel" name="handy-phone-nm" id="handy-phone-num" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Required format...555-121-1212" value="{{ contact.mobile_phone }}" required>
+                </div>
+
+                <div>
+                    <label for="office-phone-num">Office Phone</label>
+                    <input type="tel" name="office-nm" id="office-phone-num" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Required format...555-121-1212" value="{{ contact.office_phone }}" required>
+                </div>
+            </div>
+            <div class="right-contact">
+                <div>
+                    <label for="contact-url">URL Website</label>
+                    <input type="url" name="url-nm" id="contact-url" value="{{ contact.url }}" placeholder="https://.example.com">
+                </div>
+                <div>
+                    <label for="office-phone-ext">Office Ext.</label>
+                    <input type="number" name="office-text-nm" id="office-phone-ext" min="0" max="99999" value="{{ contact.office_text }}" placeholder="e.g, 8565" >
+                </div>
+            </div>
+        </form>
+        <div class="contact-btns">
+            <input type="submit" form="contact-frm" id="cont-update-btn" value="Update"/>
+            <button onClick="resetContactInfo()" id="cont-reset-btn">Reset</button>
+        </div>
+    </div>
+
+    <div class="address sec-3">
+        <h1 class="sec-heading">Address</h1>
+        <form action="/profile/address-update/" method="POST" id="address-frm" name="address-frm">
+            {% csrf_token %}
+            <div class="left-address">
+                <div>
+                    <label for="str-num">Street Number</label>
+                    <input type="number" id="str-num" name="street-number-nm" min="0" max="999999" placeholder="1422" value="{{ address.street_number }}" required>
+                </div>
+
+                <div>
+                    <label for="str-name">Street Name</label>
+                    <input type="text" id="str-name" name="street-name-nm" placeholder="Oak Lane Dr." value="{{ address.street_name }}" required>
+                </div>
+
+                <div>
+                    <label for="po-box">PO Box Num.</label>
+                    <input type="number" id="po-box" name="po-box-nm" placeholder="Enter numbers only e.g., 1459" min="0" max="999999" value="{{ address.po_box }}">
+                </div>
+            </div>
+
+            <div class="right-address">
+                <div>
+                    <!-- Used in two spots. script uses class "states" -->
+                    <label for="address-state">State</label>
+                    <select name="states-nm" class="states" id="address-state" onchange="populateCity()" required>{{ address.state }}</select>
+                </div>
+                <div>
+                    <label for="address-city">City</label>
+                    <select name="address-city-nm"  id="address-city" value="" required>{{ address.city }}</select>
+                </div>
+                <div>
+                    <label for="zip-code">Zip Code</label>
+                    <input type="number" name="zip-address-nm" id="zip-code" placeholder="48326" value="{{ address.zip_code }}"/>
+                </div>
+            </div>
+        </form>
+        <div class="address-btns">
+            <input type="submit" form="address-frm" id="add-update-btn" value="Update"/>
+            <button onClick="resetAddressInfo()" id="add-reset-btn">Reset</button>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/states.js' %}"></script>
+<script src="{% static 'js/functions.js' %}"></script>
+    
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <title>Login</title>
+{% endblock head %} 
+
+{% block content %}
+<div class="login-wrapper">
+    <ul class="error-msgs" >
+        {% if messages %}
+            {% for message in messages %}
+                <li {% if message.tags %} class"{{message.tags}}"{% endif %}>{{message}}</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <form action="/login/" method="POST" name=login-frm id="loginFrm">
+        {% csrf_token %}
+        <h1>Login</h1>
+        <div>
+            <label for="log-email">Email</label>
+            <input type="email" name="log-email-nm" id="log-email" maxlength="50">
+        </div>
+
+        <div>
+            <label for="log-password">Password</label>
+            <input type="password" name="log-password-nm" id="log-password">
+        </div>
+        <p id="password-email-login-err"></p>
+        <input type="submit" name="log-sub-btn" id="log-sub" value="Login">
+        
+    </form>
+</div>
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock %}

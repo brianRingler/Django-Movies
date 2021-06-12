@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: 1px dotted rgb(234, 0, 255); */
+}
+
+.wrapper-footer {
+    position: absolute;
+    background-attachment: scroll;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-main {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    height: 65px;
+    background-color:black;
+    font-family: var(--text-font);
+}
+
+.footer-main span,
+.footer-main a {
+    margin: 5px;
+    color: var(--text-yellow);
+  }
