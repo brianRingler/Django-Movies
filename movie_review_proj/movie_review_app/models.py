@@ -128,11 +128,6 @@ class Rating(models.Model):
         return f'{self.id}, {self.rating}'
 
 class Movie(models.Model):
-    '''
-    1-M A A Movie can have many ratings and a Rating can be for only one Movie
-    1-M User can upload many movies and movie can only be uploaded by one user
-    M-M User can like many movies and movies can have many user likes
-    '''
     title = models.CharField(max_length=50, null=False)
     movie_desc = models.CharField(max_length=255, null=True)
     movie_rating = models.ForeignKey(Rating, related_name="movie_ratings", on_delete=models.CASCADE)

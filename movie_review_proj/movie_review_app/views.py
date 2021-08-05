@@ -252,12 +252,10 @@ def movie_listing_view(request):
     # On Add Movie page load or redirected to after movie added     
     active_user = User.objects.get(id=request.session['active_user_id'])
     all_movies = Movie.objects.all()
-
     context = {
         'movies' : all_movies,
         'active_User' : active_user
     }
-
     return render(request, 'add_movie.html', context)
 
 
@@ -279,26 +277,21 @@ def add_movie(request):
         Rating.objects.create(
             rating = request.POST.get('user-movie-rating-nm', None)
         )
-        # Get the last rating in db which will be most recent add to Movie
+
         active_user_rating = Rating.objects.last()
 
         active_user = User.objects.get(id=request.session['active_user_id'])
-           
         movie_added = Movie.objects.create(
             title = request.POST.get('movie-title-nm', None),
             movie_desc = request.POST.get('movie-desc-nm', None),
             movie_rating = active_user_rating,
             user_uploaded = active_user
         )
-        movie_added.save()
 
-        # This creates the relationship only
-        # Get the last movie that was added - Required b/c m-to-m
+        movie_added.save()
         movie_added = Movie.objects.last()
-        
-        # When user adds movie auto set that they liked 
         active_user.users_liked.add(movie_added)
-        # When user adds movie keep on same page
+
         return redirect('/movies')
 
 
