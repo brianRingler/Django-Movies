@@ -15,7 +15,7 @@
         {% if request.session.logged_in == True %} 
             <li>Welcome, {{request.session.active_user_first}} {{request.session.active_user_last}}</li>
             <li><a href="{% url 'home_view' %}">Home</a></li>
-            <li><a href="{% url 'add_movie_view' %}">Add Movie</a></li>
+            <li><a href="{% url 'movie_listings' %}">Add Movie</a></li>
             <li><a href="{% url 'profile_view' %}">Profile</a></li>
             <li><a href="{% url 'log_out' %}">Log Out</a></li>
           {% else %}
@@ -30,7 +30,7 @@
         {% if request.session.logged_in == True %} 
             <li>Welcome, {{request.session.active_user_first}} {{request.session.active_user_last}}</li>
             <li><a href="{% url 'home_view' %}">Home</a></li>
-            <li><a href="{% url 'add_movie_view' %}">Add Movie</a></li>
+            <li><a href="{% url 'movie_listings' %}">Add Movie</a></li>
             <li><a href="{% url 'profile_view' %}">Profile</a></li>
             <li><a href="{% url 'log_out' %}">Log Out</a></li>
           {% else %}

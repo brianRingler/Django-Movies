@@ -31,6 +31,7 @@ background-color: var(--dark-bg-color */
 :root {
     --dark-bg-color:#282c34;
     --bold-font: 'Anton', sans-serif;
+    --bold-let-space: 0.1em;
     --text-font: 'Comfortaa', cursive;
     --text-yellow: #ffc600;
     --text-black: black;
@@ -50,6 +51,7 @@ background-color: var(--dark-bg-color */
 .imdb-header > h1,
 .fav-movie-header > h1 {
     font-family: var(--bold-font);
+    letter-spacing: var(--bold-let-space);
     margin-bottom: 10px;
 }
 
@@ -117,6 +119,7 @@ p > a {
 .add-movie-all-movies > h1 {
     margin-bottom: 2rem;
     font-family: var(--bold-font);
+    letter-spacing: var(--bold-let-space);
     font-size: 3rem;
 }
 
@@ -150,6 +153,7 @@ form[name="add-movie-nm"] {
 form > h1 {
     margin:auto;
     font-family: var(--bold-font);
+    letter-spacing: var(--bold-let-space);
     font-size: 2.5rem;
 }
 
@@ -189,6 +193,12 @@ form[name="all-movies-nm"] {
 .movie-title {
     font-size: 20px;
     font-weight: bold;
+}
+
+.movie-title:hover {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 

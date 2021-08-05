@@ -245,18 +245,35 @@ def profile_view(request):
     return render(request, 'user_profile.html', context)
 
 
-def add_movie_view(request):
+def movie_listing_view(request):
+    '''Populate the Movie View page with title, user who added
+    and if it was liked or not liked'''
+
+    # On Add Movie page load or redirected to after movie added     
+    active_user = User.objects.get(id=request.session['active_user_id'])
+    all_movies = Movie.objects.all()
+
+    context = {
+        'movies' : all_movies,
+        'active_User' : active_user
+    }
+
+    return render(request, 'add_movie.html', context)
+
+
+def add_movie(request):
     '''
     Allow a user that is logged-in to add a new unique movie to the database
     Movie added by user is automatically "LIKED" by user
     Title and Description required with min desc length of 5'''
+
     if request.method == 'POST' and request.session['logged_in'] == True:
         errors = Movie.objects.validation_added_movie(request.POST)
 
         if len(errors) > 0:
             for k, v in errors.items():
                 messages.error(request, v)   
-            return redirect('/add-movie')
+            return redirect('/movies')
 
         # Create the User Rating 
         Rating.objects.create(
@@ -265,56 +282,42 @@ def add_movie_view(request):
         # Get the last rating in db which will be most recent add to Movie
         active_user_rating = Rating.objects.last()
 
-
         active_user = User.objects.get(id=request.session['active_user_id'])
-        active_user.save()
-        
+           
         movie_added = Movie.objects.create(
             title = request.POST.get('movie-title-nm', None),
             movie_desc = request.POST.get('movie-desc-nm', None),
-            movie_rating = active_user_rating, # 1-m relationship
-            user_uploaded = active_user # 1-m relationship
-        )    
-
-        # Save the Movie 
+            movie_rating = active_user_rating,
+            user_uploaded = active_user
+        )
         movie_added.save()
-        # Create and save the user_liked 
-        movie_added.user_uploaded.add(active_user)
-        result = active_user.user_liked.add(movie_added)
-        # Create the relationship for the many-to-many
-        # instance of User - Related Name - Add - Movie Created 
-        print(f'+++++MOVIE ADDED => {movie_added}')
-        print(f'THIS IS ACTIVE USER => {active_user}')
-        
-        print(f'*******User Like ********{result}')
-        
 
+        # This creates the relationship only
+        # Get the last movie that was added - Required b/c m-to-m
+        movie_added = Movie.objects.last()
+        
+        # When user adds movie auto set that they liked 
+        active_user.users_liked.add(movie_added)
         # When user adds movie keep on same page
-        return redirect('/add-movie')
-
-    all_movies = Movie.objects.all()
-    context = {
-        'movies' : all_movies,
-        'active_User_id' : request.session['active_user_id'] 
-    }
-    for movie in all_movies:
-        print(movie.title)
-        print(movie.movie_desc)
-        print(movie.movie_rating)
-        print(movie.user_uploaded.first_name)
-        print(movie.user_uploaded.last_name)
-        print(movie.user_liked)
-        print('=================================')
-    
-    return render(request, 'add_movie.html', context)
+        return redirect('/movies')
 
 
-def edit_movie_view(request, id_edit):
+
+def edit_movie_view(request, id_movie):
     '''Allow logged in user to edit movie if they added the movie'''
-    return render(request, 'edit_movie.html')
+
+    selected_movie_to_edit = Movie.objects.get(id=id_movie)
+    active_user = User.objects.get(id=request.session['active_user_id'])
+    
+    context = {
+        'selected_movie' : selected_movie_to_edit,
+        'user_time_zone': active_user.timezone,
+    }
+
+    return render(request, 'edit_movie.html', context)
 
 
-def view_movie_view(request, id_view):
+def view_movie_view(request, id_movie):
     '''Allow users to view any movie and add to favorites'''
     return render(request, 'view_movie.html')
 
@@ -372,4 +375,54 @@ def log_out(request):
 
 
 def delete_movie(request, id_delete):
+    '''Allow the active user to delete movie if they added to db'''
+    # Create instance if movie to delete 
+    movie_to_delete = Movie.objects.get(id=id_delete)
+    movie_to_delete.delete()
     return redirect('/add-movie')
+
+
+def add_like(request, id_like):
+    # Create an instance of User which is the logged-in user
+    active_user = User.objects.get(id=request.session['active_user_id'])
+    # Create an instance of the book
+    active_movie = Movie.objects.get(id=id_like)
+    # Add active to active book favorites 
+    active_movie.user_liked.add(active_user)
+
+    return redirect('/add-movie')
+
+
+def remove_like(request, id_unlike):
+    '''With the book id passed remove this book from active user favorites'''
+    # Create an instance of User which is the logged-in user
+    active_user = User.objects.get(id=request.session['active_user_id'])
+    # Create an instance of the book
+    active_movie = Movie.objects.get(id=id_unlike)
+    # Add active to active book favorites 
+    active_movie.user_liked.delete(active_user)
+
+    return redirect('/add-movie')    
+
+
+def edit_view_option(request, id_movie):
+    '''When User selects the Movie link from the Add Movie
+    page they will be directed to the Edit page OR the 
+    View Movie Details page. If User uploaded movie they can access 
+    edit page else only the details page'''
+    active_user_id = request.sessions['active_user_id']
+
+    # Create instance of Movie
+    selected_movie = Movie.objects.get(id=id_movie)
+    # Get id of user who uploaded 
+    uploaded_by_id = selected_movie.user_uploaded.id
+    # compare active user id with user who uploaded id
+    print(f'Active User id {active_user_id} Uploaded by id: {uploaded_by_id}')
+
+    if int(active_user_id) == (uploaded_by_id):
+        # Active user did upload requested movie go to Edit
+        edit_url = f'/edit-movie/{id_movie}/'
+        return redirect(edit_url)
+    
+    details_url = f'/view-movie/{id_movie}/'
+    return(details_url)

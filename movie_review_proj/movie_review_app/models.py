@@ -141,12 +141,7 @@ class Movie(models.Model):
     objects = ValidationManger()
 
     def __str__(self):
-        return f'{self.id}, {self.title}, {self.user_uploaded.email}'  
-
-
-  
-
-
+        return f'{self.id}, {self.title}, {self.user_liked}, {self.user_uploaded.email}'  
 
 
 class ContactInfo(models.Model):

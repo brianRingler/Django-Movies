@@ -2,14 +2,92 @@
 
 {% block head %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/footer.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/edit_movie.css' %}" />
-    <title>Edit Movie</title>
+    <link rel="stylesheet" href="{% static 'css/add_moviefooter.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/view_movie.css' %}" />
+    <title>View Movie</title>
 {% endblock head %} 
-
-
+ 
 {% block content %}
+<div class="wrapper-selected-movie">
+<ul class="error-msgs" >
+    {% if messages %}
+        {% for message in messages %}
+            <li {% if message.tags %} class"{{message.tags}} blink"{% endif %}>{{message}}</li>
+        {% endfor %}
+    {% endif %}
+</ul> 
 
+<div class="left-side-bar">
+    <div class="imdb-header">
+        <h1>IMDB Top 250</h1>
+    </div>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+</div>
+
+<div class="selected-movie">
+    <h1>Update Movie & Who Likes</h1>
+    <div class="form-container">
+        <form action="#" method="POST" name="edit-movie-nm" id="add-movie">
+            {% csrf_token %}
+            <h1>Edit Title & Description</h1>
+            <h3 id="movie-title-edit">{{selected_movie.title}}</h3>
+            {% load tz %}
+            <div class="edit-movie">
+                <p>Added By </p>
+                <p id="p-add-by" class="sec-p">
+                    {{ selected_movie.user_uploaded.first_name }} {{ selected_movie.user_uploaded.last_name }}
+                </p>
+            </div>
+
+            <div class="edit-movie">
+                <p>Added On </p>
+                <p id="p-add-on" class="sec-p">{{ selected_movie.user_uploaded.created_at|timezone:user_time_zone}}</p>
+            </div>
+
+            <div class="edit-movie">
+                <p>Last Update </p>
+                <p class="sec-p">{{ selected_movie.user_uploaded.updated_at|timezone:user_time_zone}}</p>
+            </div>
+
+            <div class="edit-movie">
+                <p for="movie-desc">Description</p>
+                <p class="data-collect" id="movie-desc">{{ selected_movie.movie_desc }}</p>
+            </div>
+        </form>
+
+        <form action="#" method="POST" name="movie-liked-by-nm">
+            {% csrf_token %}
+            <h1>Who Liked: {{ selected_movie.title }}</h1>
+            <div class="movie-by-user">
+                <div class="movie-liked-by">
+                    <p class="users-who-liked">{{selected_movie.user_uploaded.first_name}}  {{selected_movie.user_uploaded.last_name}}</p>
+                    <span id="thumbs-down"><a href="/remove-like/{{ selected_movie.id }}">👎</a></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="right-side-bar">
+    <div class="fav-movie-header">
+        <h1>User Movie Ratings</h1>
+    </div>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+    <p>Title of the Movie and it could be...</p>
+</div>
+
+</div>
 
 {% endblock %}

@@ -55,7 +55,6 @@
                         <option name="user-movie-rating-nm" value="5">⭐⭐⭐⭐⭐</option>
                     </select>
                 </div>
-
                 <input type="submit" name="add-movie-submit-nm" id="add-movie-submit" value="Add Movie">
             </form>
 
@@ -65,22 +64,21 @@
                 <div class="movie-by-user">
                     <div class="movie-added-by">
                         {% for movie in movies %}
-                        <p class="movie-title"><a href="#">{{ movie.title }}</a></p>
+                        <p class="movie-title"><a href="/edit-movie/{{ movie.id }}">{{ movie.title }}</a></p>
                         <div class="fav-up-down">
                             <p class="added-by">
                                 {{ movie.user_uploaded.first_name }} {{ movie.user_uploaded.last_name}}
                             </p>
-                            {% if movie.user.id == active_user_id and movie.user_liked == 'TRUE' %}
+
+                            {% if movie in active_user.users_liked.all %}
                                 <span id="liked-fire">🔥</span>
-                                <span  id="thumbs-down"><a href="/profile/">👎</a></span>
-                                <input type="hidden" name=id="hidden-liked-nm" id="hidden-thumbs-down" value="NULL">
-                                <input type="hidden" name="thumbs-up-down-nm" id="thumbs-down" value="{{ movie.user_liked }}">
+                                <span  id="thumbs-down"><a href="/remove-like/{{ movie.id }}">👎</a></span>
                             {% else %}
-                                <span  id="thumbs-up"><a href="/profile/">👍</a></span>
-                                <input type="hidden" name="thumbs-up-down-nm" id="hidden-thumbs-up" value="{{ movie.user_liked }}">
+                                <span  id="thumbs-up"><a href="/add-like/{{ movie.id }}">👍</a></span>
                             {% endif %}
-                        </div>
+                        </div>    
                         {% endfor %}
+                        
                     </div>
                 </div>
             </form>

@@ -24,9 +24,11 @@ background-color: var(--dark-bg-color */
 :root {
     --dark-bg-color:#282c34;
     --bold-font: 'Anton', sans-serif;
+    --bold-let-space: 0.1em;
     --text-font: 'Comfortaa', cursive;
     --text-yellow: #ffc600;
     --text-black: black;
+    
 }
 
 .wrapper-selected-movie {
@@ -38,12 +40,30 @@ background-color: var(--dark-bg-color */
             "left   center   right";
 }
 
+#main-heading {
+    margin-bottom: 10px;
+    font-family: var(--bold-font);
+    font-size: 3rem;
+}
+
 
 /* Combine left and right side bar */
+.selected-movie > h1,
 .imdb-header > h1,
-.fav-movie-header > h1 {
+.fav-movie-header > h1,
+form[name="movie-liked-by-nm"] > h1,
+form[name="edit-movie-nm"] > h1 {
     font-family: var(--bold-font);
+    letter-spacing: var(--bold-let-space);
     margin-bottom: 10px;
+}
+
+form[name="edit-movie-nm"] > h1 {
+    margin: auto;
+}
+
+.selected-movie > h1 {
+    font-size: 3rem;
 }
 
 .left-side-bar > p,
@@ -75,7 +95,6 @@ p > a {
     color: var(--text-black)
 }
 
-
 /* End Combined Side Bars */
 
 .left-side-bar {
@@ -105,13 +124,14 @@ p > a {
     flex-flow: row wrap;
     justify-content: center;
     align-items: flex-start;
+    margin-top: 25px;
 }
 
 
 /* Set space between two forms. Not sure why 'space-evenly' did not 
 work correctly in class .add-movie-all-movies */
 form[name="edit-movie-nm"] {
-    margin-right: 150px;
+    margin-right: 100px;
 }
 
 /* Center Section LEFT Side Form START */
@@ -120,7 +140,7 @@ form[name="edit-movie-nm"] {
     flex-flow: column;
     align-items: flex-start;
 
-    width:31.10rem;
+    width: auto;
     padding: 10px 10px 10px 10px;
     border: 1px solid var(--text-yellow);
     border-radius: 5px;
@@ -133,7 +153,19 @@ form[name="edit-movie-nm"] {
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
+
+.sec-p {
+    margin-left: 20px;
+    color: var(--text-black);
+}
+
+#p-add-by {margin-left: 45px}
+#p-add-on {margin-left: 40px;}
+
+
 
 
 /* Center Section RIGHT Side Form START */
@@ -142,7 +174,7 @@ form[name="movie-liked-by-nm"] {
     flex-flow: column;
     align-items: center;
 
-    width:23rem;
+    width: auto;
     padding: 10px 10px 10px 10px;
     border: 1px solid var(--text-yellow);
     border-radius: 5px;
@@ -162,12 +194,21 @@ form[name="movie-liked-by-nm"] {
     justify-content: flex-start;
     margin: 5px 0 20px 20px; 
     font-size: 19px;
+    color: var(--text-black);
 }
-
-
 
 .movie-liked-by > span {
     margin-left: 10px;
+    text-decoration: none;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.movie-liked-by > a:hover {
+    cursor: pointer;
 }
 
 
@@ -188,7 +229,7 @@ form[name="movie-liked-by-nm"] {
 
 /* Input fields */
 label {
-    font-size: 1.25rem;
+    font-size: 20px;
 }
 
 
@@ -208,6 +249,7 @@ textarea  {
 
   textarea {
       height: 5rem;
+      margin-left: 25px;
   }
   
   input[type="text"]:focus, 
@@ -218,6 +260,11 @@ textarea  {
 
 
 /*  Buttons */
+button > a {
+    text-decoration: none;
+    color: var(--text-yellow);
+}
+
 input[type="submit"],
 button {   
     height: 2.25rem;
@@ -228,13 +275,28 @@ button {
     border-radius: 15px;
     background-color: black;
     color: var(--text-yellow);
-    margin-left: 22rem;
+    
 }
 
 input[type="submit"]:hover,
 button:hover {
     cursor: pointer;
-    color: whitesmoke;
+    color: white;
     border: 2px solid white;
     background:  var(--text-yellow);
 }
+
+a:hover {
+    color: white;
+}
+
+input[type="submit"] {
+    margin-right: 45px;
+}
+
+#update-delete-btns {
+    display: inline-block;
+    margin: auto;
+}
+
+
